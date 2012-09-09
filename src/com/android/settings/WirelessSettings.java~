@@ -174,7 +174,6 @@ private static final String KEY_TOGGLE_NFC_SOUNDS = "toggle_nfc_sounds";
         if (toggleable == null || !toggleable.contains(Settings.System.RADIO_NFC)) {
             findPreference(KEY_TOGGLE_NFC).setDependency(KEY_TOGGLE_AIRPLANE);
             findPreference(KEY_ANDROID_BEAM_SETTINGS).setDependency(KEY_TOGGLE_AIRPLANE);
-	    findPreference(KEY_TOGGLE_NFC_SOUNDS).setDependency(KEY_TOGGLE_AIRPLANE);
         }
 
         // Remove NFC if its not available
@@ -183,7 +182,6 @@ private static final String KEY_TOGGLE_NFC_SOUNDS = "toggle_nfc_sounds";
             getPreferenceScreen().removePreference(nfc);
             getPreferenceScreen().removePreference(mNfcPollingMode);
             getPreferenceScreen().removePreference(androidBeam);
-	    getPreferenceScreen().removePreference(mNfcSounds);
             mNfcEnabler = null;
         }
 

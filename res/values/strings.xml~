@@ -4248,8 +4248,4 @@
     <string name="ll_reload">Reload current</string>
     <string name="ll_bad_levels">Levels must be increasing</string>
     <string name="ll_num_levels">Set number of levels</string>
-
-    <!-- NFC Sound toggle strings -->
-    <string name="nfc_sound_toggle_title">Disable NFC Sounds</string>
-    <string name="nfc_sound_toggle_summary">Disables the NFC sound effects</string>
 </resources>
