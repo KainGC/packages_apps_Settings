@@ -4255,4 +4255,7 @@
     <!-- NFC Sound toggle strings -->
     <string name="nfc_sound_toggle_title">Disable NFC Sounds</string>
     <string name="nfc_sound_toggle_summary">Disables the NFC sound effects</string>
+
+    <string name="vibration_title">Phone vibration</string>
+
 </resources>
