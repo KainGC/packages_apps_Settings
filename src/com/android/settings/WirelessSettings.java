@@ -55,6 +55,7 @@ public class WirelessSettings extends SettingsPreferenceFragment
     private static final String KEY_TOGGLE_NSD = "toggle_nsd"; //network service discovery
     private static final String KEY_CELL_BROADCAST_SETTINGS = "cell_broadcast_settings";
     private static final String KEY_NFC_POLLING_MODE = "nfc_polling_mode";
+    private static final String KEY_TOGGLE_NFC_SOUNDS = "toggle_nfc_sounds";
 
     public static final String EXIT_ECM_RESULT = "exit_ecm_result";
     public static final int REQUEST_CODE_EXIT_ECM = 1;
@@ -65,6 +66,7 @@ public class WirelessSettings extends SettingsPreferenceFragment
     private NfcAdapter mNfcAdapter;
     private NsdEnabler mNsdEnabler;
     private ListPreference mNfcPollingMode;
+    private CheckBoxPreference mNfcSounds;
 
     /**
      * Invoked on each preference click in this hierarchy, overrides
@@ -94,6 +96,11 @@ public class WirelessSettings extends SettingsPreferenceFragment
             updateNfcPolling();
             return true;
         }
+	else if (preference == mNfcSounds) {
+	    Settings.System.putInt(getActivity().getContentResolver(),
+		Settings.System.TOGGLE_NFC_SOUNDS, mNfcSounds.isChecked() ? 0 : 1);
+	    return true;
+	}
         return false;
     }
 
@@ -127,8 +134,13 @@ public class WirelessSettings extends SettingsPreferenceFragment
                 Settings.System.NFC_POLLING_MODE, 3)) + "");
         updateNfcPolling();
 
+	mNfcSounds = (CheckBoxPreference) findPreference(KEY_TOGGLE_NFC_SOUNDS);
+	mNfcSounds.setChecked(Settings.System.getInt(activity.getContentResolver(),
+	    Settings.System.TOGGLE_NFC_SOUNDS, 0) != 0);
+	mNfcSounds.setOnPreferenceChangeListener(this);
+
         mAirplaneModeEnabler = new AirplaneModeEnabler(activity, mAirplaneModePreference);
-        mNfcEnabler = new NfcEnabler(activity, nfc, androidBeam, mNfcPollingMode);
+        mNfcEnabler = new NfcEnabler(activity, nfc, androidBeam, mNfcPollingMode, mNfcSounds);
 
         // Remove NSD checkbox by default
         getPreferenceScreen().removePreference(nsd);
@@ -168,6 +180,7 @@ public class WirelessSettings extends SettingsPreferenceFragment
         if (toggleable == null || !toggleable.contains(Settings.Global.RADIO_NFC)) {
             findPreference(KEY_TOGGLE_NFC).setDependency(KEY_TOGGLE_AIRPLANE);
             findPreference(KEY_ANDROID_BEAM_SETTINGS).setDependency(KEY_TOGGLE_AIRPLANE);
+	    findPreference(KEY_TOGGLE_NFC_SOUNDS).setDependency(KEY_TOGGLE_AIRPLANE);
         }
 
         // Remove NFC if its not available
@@ -176,6 +189,7 @@ public class WirelessSettings extends SettingsPreferenceFragment
             getPreferenceScreen().removePreference(nfc);
             getPreferenceScreen().removePreference(mNfcPollingMode);
             getPreferenceScreen().removePreference(androidBeam);
+	    getPreferenceScreen().removePreference(mNfcSounds);
             mNfcEnabler = null;
         }
 
