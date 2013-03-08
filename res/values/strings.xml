@@ -3144,6 +3144,7 @@
     <!-- Summary for the accessibility preference to auto update screen magnification. [CHAR LIMIT=50] -->
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary">Update
         screen magnification on app transitions</string>
+    <string name="accessibility_home_button_answers_call_title">Home button answers call</string>
     <!-- Title for the accessibility preference to power button to end a call. [CHAR LIMIT=35] -->
     <string name="accessibility_power_button_ends_call_prerefence_title">Power button ends call</string>
     <!-- Title for the accessibility preference to speak passwords. [CHAR LIMIT=35] -->
@@ -4493,4 +4494,13 @@
 
     <!-- Hostname setting -->
     <string name="device_hostname">Device hostname</string>
+
+    <!--- Sms security limit -->
+    <string name="app_security_title">App security</string>
+    <string name="sms_security_check_limit_title">SMS message limit</string>
+    <string name="sms_security_check_limit_summary">Display an alert dialog to prevent applications from sending SMS messages too frequently. Current limit: %d messages in 30 minutes (requires reboot)</string>
+    <string name="sms_security_check_limit_default">30 (Default)</string>
+    
+    <!-- Sprint Tools -->
+    <string name="sprint_tools_title">Sprint Tools</string>
 </resources>
